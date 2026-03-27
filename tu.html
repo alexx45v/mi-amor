@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti… 💘</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at center, #1a0010, #000);
+    color:white;
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+    max-width:650px;
+    padding:30px;
+}
+
+.texto{
+    font-size:1.8em;
+    min-height:150px;
+    animation: flotar 4s ease-in-out infinite;
+}
+
+/* flotar */
+@keyframes flotar{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* final */
+.final{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2.4em;
+    opacity:0;
+    transition:2s;
+}
+
+.show{opacity:1;}
+
+.glow{
+    text-shadow:0 0 10px #ff4e88, 0 0 30px #ff4e88;
+    animation: palpitar 1.5s infinite;
+}
+
+/* palpitar */
+@keyframes palpitar{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="texto" id="texto"></div>
+</div>
+
+<div class="final" id="final">
+    <div class="glow" id="mensajeFinal"></div>
+</div>
+
+<script>
+const mensajes = [
+"Hay cosas que no te digo… pero las siento cada vez más 😌",
+"A veces me sorprendo pensándote… sin darme cuenta 😏",
+"Porque contigo todo se siente diferente… más intenso…",
+
+"Y no es solo que me gustes… es que me acostumbro a ti 💭",
+"Me gusta cómo te vuelves parte de mí… poco a poco…",
+
+"Y sí… me gusta imaginarte cerquita… sin soltarte tan fácil…",
+"Porque no me nace compartir lo que me hace sentir así…",
+
+"Contigo no me sale quererte normal… contigo quiero más…",
+"Me gusta cuando sonríes… pero más cuando soy yo el motivo 😌",
+
+"A veces siento que te me metes en la mente… y ya no sales…",
+"Y no te saco… porque tampoco quiero hacerlo 😏",
+
+"Me gusta esa forma tuya… que sin darte cuenta me envuelve…",
+"como si ya supieras que termino quedándome contigo…",
+
+"Y es que contigo no quiero ir despacio… pero tampoco rápido…",
+"quiero quedarme… sentirte… acostumbrarme a ti 💘",
+
+"Hay algo en ti que no sé explicar… pero sí sé que no lo quiero perder…",
+"ni compartir… si soy sincero 😌",
+
+"Me gusta pensar que poco a poco te vas quedando conmigo…",
+"no obligada… sino porque te nace…",
+
+"Y cuando eso pasa… uff… ahí es donde más me gustas 😏",
+
+"A veces imagino tenerte cerca… hablarte bajito…",
+"y que te quedes ahí… sin querer irte…",
+
+"Porque sí… te quiero bien… te quiero feliz…",
+"pero también te quiero conmigo 💘",
+
+"Y no es solo cariño… esto tiene algo más…",
+"algo que se siente… pero no se explica fácil…",
+
+"Me gusta cuando me eliges…",
+"pero más cuando ni siquiera dudas…",
+
+"Porque ahí es donde sé… que ya estás cayendo poquito a poco…",
+
+"Y no te preocupes…",
+"yo también estoy cayendo… pero hacia ti 😌",
+
+"Así que ve acostumbrándote…",
+"a que te piense… a que te quiera… a que te tenga presente…",
+
+"porque cuando alguien como yo se queda…",
+"no es por un rato…",
+
+"es porque ya decidió que te quiere…",
+"y que te quiere para él 😏💘"
+];
+
+let i = 0;
+const textoDiv = document.getElementById("texto");
+
+/* escribir */
+function escribir(texto, callback){
+    textoDiv.innerHTML = "";
+    let j = 0;
+
+    function typing(){
+        if(j < texto.length){
+            textoDiv.innerHTML += texto.charAt(j);
+            j++;
+            setTimeout(typing, 35);
+        } else {
+            setTimeout(callback, 2200); // tiempo lectura
+        }
+    }
+    typing();
+}
+
+/* flujo automático */
+function siguiente(){
+    if(i < mensajes.length){
+        escribir(mensajes[i], () => {
+            i++;
+            siguiente();
+        });
+    } else {
+        document.getElementById("final").classList.add("show");
+        escribirFinal("ya no es casualidad… te quiero conmigo 😏💘");
+    }
+}
+
+function escribirFinal(texto){
+    const finalDiv = document.getElementById("mensajeFinal");
+    finalDiv.innerHTML = "";
+    let k = 0;
+
+    function typing(){
+        if(k < texto.length){
+            finalDiv.innerHTML += texto.charAt(k);
+            k++;
+            setTimeout(typing, 50);
+        }
+    }
+    typing();
+}
+
+/* iniciar */
+siguiente();
+</script>
+
+</body>
+</html>
